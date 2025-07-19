@@ -1,0 +1,155 @@
+
+import React, { useEffect, useRef, useState } from "react";
+import mapboxgl from "mapbox-gl";
+import { useGetLocations } from "../../services/Hooks/useLocations";
+import LocationFeture from "./LocationFeature";
+
+mapboxgl.accessToken =
+  "pk.eyJ1Ijoic2hhZmVlcTc3NDQiLCJhIjoiY205bHZnaTlzMDAwMjJxb2lxZzB4ODZkeiJ9.8Omr4NARLyfhzl6gKxGCdQ";
+
+const gtaBoundary = {
+  type: "FeatureCollection",
+  features: [
+    {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-79.6393, 43.5971],
+            [-79.1105, 43.5336],
+            [-79.1115, 43.7095],
+            [-79.6355, 43.7365],
+            [-79.6393, 43.5971],
+          ],
+        ],
+      },
+      properties: {
+        name: "Greater Toronto Area",
+      },
+    },
+  ],
+};
+
+export default function DeliveryLocations() {
+  const mapContainerRef = useRef(null);
+  const [map, setMap] = useState(null);
+  const [availableLocations, setAvailableLocations] = useState([]);
+  const { data, isLoading, isError } = useGetLocations();
+
+  useEffect(() => {
+    if (data) {
+      setAvailableLocations(data);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (!mapContainerRef.current || !data) return;
+
+    const mapInstance = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [-79.3832, 43.6532],
+      zoom: 9,
+      minZoom: 6,
+      maxZoom: 14,
+    });
+
+    mapInstance.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+    mapInstance.on("load", () => {
+      mapInstance.addSource("gta-boundary", {
+        type: "geojson",
+        data: gtaBoundary,
+      });
+
+      const deliveryGeoJSON = {
+        type: "FeatureCollection",
+        features: data.map((loc) => ({
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: loc.coords,
+          },
+          properties: {
+            name: loc.name,
+          },
+        })),
+      };
+
+      mapInstance.addSource("delivery-points", {
+        type: "geojson",
+        data: deliveryGeoJSON,
+      });
+
+      mapInstance.addLayer({
+        id: "delivery-areas",
+        type: "symbol",
+        source: "delivery-points",
+        minzoom: 12,
+        layout: {
+          "icon-image": "marker",
+          "icon-size": 1,
+          "icon-anchor": "bottom",
+          "text-field": ["get", "name"],
+          "text-size": 14,
+          "text-offset": [0, 1.2],
+          "text-anchor": "top",
+          "text-font": ["Open Sans Bold"],
+        },
+        paint: {
+          "text-color": "#222",
+        },
+      });
+    });
+
+    setMap(mapInstance);
+    return () => mapInstance.remove();
+  }, [data]);
+
+  const flyToLocation = (coords) => {
+    map?.flyTo({ center: coords, zoom: 13 });
+  };
+
+  if (isLoading)
+    return <div className="p-8 text-center text-gray-700">Loading map...</div>;
+  if (isError)
+    return (
+      <div className="p-8 text-center text-red-600">
+        Error loading delivery locations.
+      </div>
+    );
+
+  return (
+    <div className="bg-gray-50 min-h-screen px-4 md:px-12 py-10">
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Map + Feature Section */}
+        <div className="w-full lg:w-1/2 space-y-6">
+          <div className="h-[300px] md:h-[400px] lg:h-[60vh] rounded-xl shadow-lg border border-gray-200 overflow-hidden">
+            <div ref={mapContainerRef} className="w-full h-full" />
+          </div>
+          {/* Only show on desktop */}
+          <div className="hidden lg:block">
+            <LocationFeture />
+          </div>
+        </div>
+
+        {/* Location List Section */}
+        <div className="w-full lg:w-1/2 bg-white rounded-xl shadow-lg p-6 max-h-[80vh] overflow-y-auto">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {availableLocations?.map((loc, i) => (
+              <div
+                key={i}
+                onClick={() => flyToLocation(loc.coords)}
+                className="p-4 bg-gray-50 hover:bg-gray-100 transition shadow rounded-xl cursor-pointer"
+              >
+                <p className="font-semibold text-amber-900">{loc.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
