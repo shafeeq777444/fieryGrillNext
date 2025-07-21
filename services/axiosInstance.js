@@ -9,3 +9,8 @@ export const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const axiosInstance2=axios.create({
+  baseURL:process.env.NEXT_PUBLIC_BACKENDURL2,
+})
+

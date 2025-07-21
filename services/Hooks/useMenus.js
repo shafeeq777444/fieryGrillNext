@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllDishes, getWeeklyDishes } from '../apis/menuService';
 
 // getAllDishes
- export const useGetAllDishes=({vendor,category})=>{ 
+ export const useGetAllDishes=({vendor})=>{ 
  return useQuery({
-    queryKey:["dishes",vendor,category],
-    queryFn:()=>getAllDishes({vendor,category})
+    queryKey:["dishes",vendor],
+    queryFn:()=>getAllDishes({vendor})
  })
 }
 
@@ -14,6 +14,6 @@ import { getAllDishes, getWeeklyDishes } from '../apis/menuService';
 export const useGetWeeklyMenu=(category)=>{ 
    return useQuery({
       queryKey:["weeklyMenu",category],
-      queryFn:()=>getWeeklyDishes(category)
+      queryFn:()=>getWeeklyDishes()
    })
   }
