@@ -45,6 +45,11 @@ export default function DeliveryLocations() {
 
   useEffect(() => {
     if (!mapContainerRef.current || !data) return;
+    if (!mapboxgl.supported()) {
+      // Optionally show a fallback UI or message
+      console.error('WebGL not supported. Mapbox GL cannot be initialized.');
+      return;
+    }
 
     const mapInstance = new mapboxgl.Map({
       container: mapContainerRef.current,
@@ -135,18 +140,30 @@ export default function DeliveryLocations() {
         </div>
 
         {/* Location List Section */}
-        <div className="w-full lg:w-1/2 bg-white rounded-xl shadow-lg p-6 max-h-[80vh] overflow-y-auto">
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {availableLocations?.map((loc, i) => (
-              <div
-                key={i}
-                onClick={() => flyToLocation(loc.coords)}
-                className="p-4 bg-gray-50 hover:bg-gray-100 transition shadow rounded-xl cursor-pointer"
-              >
-                <p className="font-semibold text-amber-900">{loc.name}</p>
-              </div>
-            ))}
+        <div className="w-full lg:w-1/2 flex flex-col items-center">
+          <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-gray-100 p-0 sm:p-2 md:p-4">
+            <h2 className="text-xl md:text-2xl font-bold text-amber-900 px-4 pt-4 pb-2 border-b border-gray-100 sticky top-0 bg-white z-10 rounded-t-2xl">Delivery Locations</h2>
+            <div
+              className="max-h-[60vh] min-h-[200px] overflow-y-auto px-2 py-2 md:px-4 md:py-4 flex flex-col gap-3 custom-scrollbar"
+              style={{ scrollbarWidth: 'thin', scrollbarColor: '#fbbf24 #f3f4f6' }}
+            >
+              {availableLocations?.length === 0 && (
+                <div className="text-gray-400 text-center py-8">No locations available.</div>
+              )}
+              {availableLocations?.map((loc, i) => (
+                <button
+                  key={i}
+                  onClick={() => flyToLocation(loc.coords)}
+                  className="w-full text-left bg-gray-50 hover:bg-amber-50 focus:bg-amber-100 border border-gray-100 hover:border-amber-200 focus:border-amber-300 shadow-sm rounded-xl px-4 py-3 transition flex items-center gap-3 outline-none group"
+                  tabIndex={0}
+                  aria-label={`Fly to ${loc.name}`}
+                >
+                  <span className="font-semibold text-amber-900 group-hover:underline group-focus:underline text-base md:text-lg">
+                    {loc.name}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

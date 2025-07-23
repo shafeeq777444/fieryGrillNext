@@ -6,33 +6,72 @@ import { useRef, useState, useEffect } from "react";
 import Card from "../../components/weeklyMenus/WeeklyCard";
 import { useGetWeeklyMenu } from "../../services/Hooks/useMenus";
 
+// Punjabi dish images (add or adjust as needed)
+const punjabiImages = [
+    "/weeklyMenuPhotos/1.jpg",
+    "/weeklyMenuPhotos/2.jpg",
+    "/weeklyMenuPhotos/3.jpg",
+    "/weeklyMenuPhotos/4.jpg",
+    "/weeklyMenuPhotos/5.jpg",
+    "/weeklyMenuPhotos/6.jpg",
+    "/weeklyMenuPhotos/7.jpg",
+    "/weeklyMenuPhotos/8.jpg",
+    "/weeklyMenuPhotos/9.jpg",
+    "/weeklyMenuPhotos/10.jpg",
+    "/weeklyMenuPhotos/11.jpg",
+    
+];
+
+// Helper to get current week number
+function getWeekNumber(date = new Date()) {
+    const firstJan = new Date(date.getFullYear(), 0, 1);
+    const days = Math.floor((date - firstJan) / (24 * 60 * 60 * 1000));
+    return Math.ceil((date.getDay() + 1 + days) / 7);
+}
+
+// Deterministic random image for a given day/week
+function getImageForDay(day, weekNum) {
+    // Simple hash: day + weekNum
+    const hash =
+        day.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0) + weekNum;
+    return punjabiImages[hash % punjabiImages.length];
+}
 
 const HorizontalScrollCarousel = () => {
-    const{data:vegWeeklyMenu}=useGetWeeklyMenu("vegetarian")
-    const{data:nonVegWeeklyMenu}=useGetWeeklyMenu("non-vegetarian")
-    const{data:mixedWeeklyMenu}=useGetWeeklyMenu("mixed")
+    const { data: weeklyMenu } = useGetWeeklyMenu();
+    const weekNum = getWeekNumber();
+
+    // Transform weeklyMenu array to array of card data
+    const menuArray = weeklyMenu
+        ? weeklyMenu.map(({ day, items }) => ({
+            day,
+
+            sides: items,
+            image: getImageForDay(day, weekNum)
+        }))
+        : [];
     
     const targetRef = useRef(null);
     const [isMobile, setIsMobile] = useState(false);
-    const [activeCategory, setActiveCategory] = useState("non-vegetarian");
-    const [weeklyMenu, setWeeklyMenu] = useState(nonVegWeeklyMenu||[]);
-    const categories = [
-        { id: "vegetarian", name: "Vegetarian", menu: vegWeeklyMenu||[] },
-        { id: "non-vegetarian", name: "Non-Vegetarian", menu: nonVegWeeklyMenu||[] },
-        { id: "mixed", name: "Mixed", menu: mixedWeeklyMenu },
-    ];
+    // const [activeCategory, setActiveCategory] = useState("non-vegetarian");
+    // const [weeklyMenu, setWeeklyMenu] = useState(nonVegWeeklyMenu||[]);
+    // const categories = [
+    //     { id: "vegetarian", name: "Vegetarian", menu: vegWeeklyMenu||[] },
+    //     { id: "non-vegetarian", name: "Non-Vegetarian", menu: nonVegWeeklyMenu||[] },
+    //     { id: "mixed", name: "Mixed", menu: mixedWeeklyMenu },
+    // ];
     // Function to handle category change
-    const handleCategoryChange = (categoryId) => {
-        setActiveCategory(categoryId);
-        const selectedCategory = categories.find((cat) => cat.id === categoryId);
-        setWeeklyMenu(selectedCategory.menu);
-    };
-    useEffect(() => {
-        const selectedCategory = categories.find((cat) => cat.id === activeCategory);
-        if (selectedCategory && selectedCategory.menu?.length > 0) {
-            setWeeklyMenu(selectedCategory.menu);
-        }
-    }, [vegWeeklyMenu, nonVegWeeklyMenu, mixedWeeklyMenu, activeCategory,]);
+    // const handleCategoryChange = (categoryId) => {
+    //     setActiveCategory(categoryId);
+    //     const selectedCategory = categories.find((cat) => cat.id === categoryId);
+    //     setWeeklyMenu(selectedCategory.menu);
+    // };
+    // useEffect(() => {
+    //     const selectedCategory = categories.find((cat) => cat.id === activeCategory);
+    //     if (selectedCategory && selectedCategory.menu?.length > 0) {
+    //         setWeeklyMenu(selectedCategory.menu);
+    //     }
+    // }, [vegWeeklyMenu, nonVegWeeklyMenu, mixedWeeklyMenu, activeCategory,]);
 
     // Check if device is mobile
     useEffect(() => {
@@ -56,8 +95,8 @@ const HorizontalScrollCarousel = () => {
     // Adjust movement amount based on screen size
     const xRange = isMobile ? [0, 1] : [0, 1];
 
-    // Adjusted to use the dynamic weeklyMenu state
-    const xOutput = isMobile ? ["0%", `-${weeklyMenu?.length * 85 - 10}%`] : ["1%", `-${weeklyMenu?.length + 24}%`];
+    // Adjusted to use the dynamic menuArray state
+    const xOutput = isMobile ? ["0%", `-${menuArray?.length * 85 - 10}%`] : ["1%", `-${menuArray?.length + 24}%`];
 
     const x = useTransform(scrollYProgress, xRange, xOutput);
 
@@ -70,7 +109,7 @@ const HorizontalScrollCarousel = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="text-center mb-4 md:mb-8"
+                        className="text-center mt-10 -mb-4"
                     >
                         <h2 className="text-3xl md:text-5xl font-bold text-red-800 mb-2">
                             Fiery Grills Weekly Tiffin Menu
@@ -79,7 +118,7 @@ const HorizontalScrollCarousel = () => {
                     </motion.div>
 
                     {/* Category Toggle Buttons with improved mobile styling */}
-                    <div className="flex justify-center mb-6 md:mb-8 z-40">
+                    {/* <div className="flex justify-center mb-6 md:mb-8 z-40">
                         <div className="bg-white p-1 rounded-lg shadow-md flex">
                             {categories.map((category) => (
                                 <button
@@ -100,7 +139,7 @@ const HorizontalScrollCarousel = () => {
                                 </button>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Carousel Section with adjusted spacing for mobile */}
@@ -109,8 +148,8 @@ const HorizontalScrollCarousel = () => {
                         // Mobile view - swipeable horizontal scroll with better positioning
                         <div className="w-full overflow-x-auto px-4 pb-4 scrollbar-hide snap-x snap-mandatory scrollbar-hide-y">
                             <div className="flex gap-4">
-                                {weeklyMenu.map((menu) => (
-                                    <div key={menu._id} className="snap-center">
+                                {menuArray.map((menu) => (
+                                    <div key={menu.day} className="snap-center">
                                         <Card menu={menu} isMobile={true} />
                                     </div>
                                 ))}
@@ -121,10 +160,10 @@ const HorizontalScrollCarousel = () => {
                         <motion.div
                             style={{ x }}
                             className="flex gap-6 px-8"
-                            key={activeCategory} // Key to force re-render when category changes
+                            // key={activeCategory} // Key to force re-render when category changes
                         >
-                            {weeklyMenu.map((menu) => (
-                                <Card key={`${menu._id}`} menu={menu} />
+                            {menuArray.map((menu) => (
+                                <Card key={menu.day} menu={menu} />
                             ))}
                         </motion.div>
                     )}

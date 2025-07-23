@@ -1,8 +1,9 @@
 "use client"
 import React from 'react'
-import DeliveryLocations from '../../components/Location/DeliveryLocations'
-import LocationHero from '../../components/Location/HeroLocation'
+import dynamic from 'next/dynamic'
+const DeliveryLocations = dynamic(() => import('../../components/Location/DeliveryLocations'), { ssr: false })
 import AnimatedOnScroll from '../../components/common/AnimatedScrollerOnWraaper'
+import LocationHero from '@/components/Location/HeroLocation'
 
 
 const Location = () => {

@@ -11,9 +11,9 @@ import { getAllDishes, getWeeklyDishes } from '../apis/menuService';
 }
 
 // getWeeklyMenus
-export const useGetWeeklyMenu=(category)=>{ 
+export const useGetWeeklyMenu=()=>{ 
    return useQuery({
-      queryKey:["weeklyMenu",category],
+      queryKey:["weeklyMenu"],
       queryFn:()=>getWeeklyDishes()
    })
   }
