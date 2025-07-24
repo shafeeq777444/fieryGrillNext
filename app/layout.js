@@ -29,7 +29,7 @@ export const metadata = {
     siteName: 'Fiery Grills',
     images: [
       {
-        url: 'https://fiery-grill-next.vercel.app/logos/logo1.png', // ✅ absolute path
+        url: 'https://fiery-grill-next.vercel.app/logos/logo2.png', // ✅ absolute path
         width: 1200,
         height: 630,
         alt: 'Delicious Punjabi Tiffin from Fiery Grills',
