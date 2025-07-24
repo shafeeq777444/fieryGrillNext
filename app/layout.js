@@ -17,10 +17,38 @@ const geistMono = Geist_Mono({
 });
 
 // Static metadata
+// app/layout.tsx or app/page.tsx
 export const metadata = {
-  title: "Fiery Grills",
-  description: "Authentic Punjabi Tiffin in the GTA",
+  title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
+  description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
+  openGraph: {
+    title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
+    description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
+    url: 'https://fierygrills.com',
+    siteName: 'Fiery Grills',
+    images: [
+      {
+        url: '/logos/logo2.png', // must be in /public
+        width: 1200,
+        height: 630,
+        alt: 'Delicious Punjabi Tiffin from Fiery Grills',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
+    description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
+    images: ['/logos/logo2.png'],
+  },
+  icons: {
+    icon: '/logos/logo2.png',
+    apple: '/logos/logo2.png',
+  },
 };
+
 
 export default function RootLayout({ children }) {
   return (

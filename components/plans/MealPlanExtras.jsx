@@ -21,15 +21,15 @@ const SubscriptionFeatures = () => {
   ];
 
   return (
-    <section className="bg-white pt-14">
-      <div className="max-w-6xl mx-auto">
-
-         <div className="text-center mb-8">
-          <p className="text-gray-700 text-lg mb-2 font-medium">
-            We deliver Monday through Friday, with optional Saturday delivery
+    <section className="bg-white pt-8 pb-8 ">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Delivery Info */}
+        <div className="text-center mb-10">
+          <p className="text-gray-800 text-lg mb-2 font-semibold">
+            We deliver <span className="text-primaryDark font-bold">Monday through Friday</span>, with optional <span className="text-primaryDark font-bold">Saturday delivery</span>
           </p>
           <p className="text-gray-600 text-base">
-            Additional $5 fee applies for Saturday delivery
+            <span className="font-medium">Additional $5 fee</span> applies for Saturday delivery
           </p>
         </div>
 

@@ -1,8 +1,9 @@
-
+"use client"
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import { useGetLocations } from "../../services/Hooks/useLocations";
 import LocationFeture from "./LocationFeature";
+import DeliveryLocationsSkeleton from "../skeltons/location-skeltons/DeliveryLocationsSkeleton";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic2hhZmVlcTc3NDQiLCJhIjoiY205bHZnaTlzMDAwMjJxb2lxZzB4ODZkeiJ9.8Omr4NARLyfhzl6gKxGCdQ";
@@ -30,6 +31,25 @@ const gtaBoundary = {
     },
   ],
 };
+
+// SVG Location Pin Icon
+const LocationPinIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="w-10 h-10 text-amber-500 mx-auto"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 21c.414-1.03 2-4.09 2-7a5 5 0 10-4 0c0 2.91 1.586 5.97 2 7z"
+    />
+    <circle cx="12" cy="10" r="2" fill="currentColor" />
+  </svg>
+);
 
 export default function DeliveryLocations() {
   const mapContainerRef = useRef(null);
@@ -116,14 +136,7 @@ export default function DeliveryLocations() {
     map?.flyTo({ center: coords, zoom: 13 });
   };
 
-  if (isLoading)
-    return <div className="p-8 text-center text-gray-700">Loading map...</div>;
-  if (isError)
-    return (
-      <div className="p-8 text-center text-red-600">
-        Error loading delivery locations.
-      </div>
-    );
+  if (isLoading) return <DeliveryLocationsSkeleton />;
 
   return (
     <div className="bg-gray-50 min-h-screen px-4 md:px-12 py-10">
@@ -150,19 +163,23 @@ export default function DeliveryLocations() {
               {availableLocations?.length === 0 && (
                 <div className="text-gray-400 text-center py-8">No locations available.</div>
               )}
-              {availableLocations?.map((loc, i) => (
-                <button
-                  key={i}
-                  onClick={() => flyToLocation(loc.coords)}
-                  className="w-full text-left bg-gray-50 hover:bg-amber-50 focus:bg-amber-100 border border-gray-100 hover:border-amber-200 focus:border-amber-300 shadow-sm rounded-xl px-4 py-3 transition flex items-center gap-3 outline-none group"
-                  tabIndex={0}
-                  aria-label={`Fly to ${loc.name}`}
-                >
-                  <span className="font-semibold text-amber-900 group-hover:underline group-focus:underline text-base md:text-lg">
-                    {loc.name}
-                  </span>
-                </button>
-              ))}
+              {availableLocations?.map((loc, i) => {
+                return (
+                  <button
+                    key={i}
+                    onClick={() => flyToLocation(loc.coords)}
+                    className="w-full text-left bg-gray-50 hover:bg-amber-50 focus:bg-amber-100 border border-gray-100 hover:border-amber-200 focus:border-amber-300 shadow-sm rounded-xl px-4 py-3 transition flex items-center gap-3 outline-none group"
+                    tabIndex={0}
+                    aria-label={`Fly to ${loc.name}`}
+                  >
+                    {/* SVG Location Pin Icon */}
+                   
+                    <span className="font-semibold text-amber-900 group-hover:underline group-focus:underline text-base md:text-lg">
+                      {loc.name}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

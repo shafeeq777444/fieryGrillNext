@@ -4,7 +4,6 @@ const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
-    
     {
       question: 'Can I skip a delivery?',
       answer:
@@ -32,7 +31,7 @@ const Faq = () => {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="pt-4 pb-8 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -42,39 +41,39 @@ const Faq = () => {
             Find answers to common questions about our tiffin service.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-3xl mx-auto space-y-5">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
-
             return (
               <div
                 key={index}
-                className="border border-gray-200 rounded-lg transition-all duration-300"
+                className={`rounded-xl shadow-sm transition-all duration-300 bg-white hover:shadow-md`}
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="flex items-center justify-between w-full p-4 text-left bg-white hover:bg-gray-50"
+                  className="flex items-center justify-between w-full p-5 text-left bg-white rounded-xl group focus:outline-none focus:ring-0 outline-none ring-0"
+                  aria-expanded={isOpen}
+                  tabIndex={0}
+                  style={{ boxShadow: 'none' }}
                 >
-                  <span className="text-lg font-medium text-gray-900">
+                  <span className="text-lg font-semibold text-gray-900 group-hover:text-primaryDark transition-colors duration-200">
                     {faq.question}
                   </span>
-                  <i
-                    className={`ri-arrow-down-s-line text-gray-500 transform transition-transform duration-300 ${
-                      isOpen ? 'rotate-180' : ''
-                    }`}
-                  />
+                  {/* Animated SVG Arrow */}
+                  <span className={`ml-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                    <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500 group-hover:text-primaryDark" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                  </span>
                 </button>
-
                 {/* Answer Section with Smooth Fade/Slide Down */}
                 <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isOpen
-                      ? 'grid-rows-[1fr] opacity-100'
-                      : 'grid-rows-[0fr] opacity-0'
-                  }`}
+                  className="overflow-hidden transition-all duration-400"
+                  style={{
+                    maxHeight: isOpen ? '200px' : '0px',
+                    opacity: isOpen ? 1 : 0,
+                  }}
                 >
-                  <div className="overflow-hidden px-4 py-2 bg-gray-50 border-t border-gray-200">
-                    <p className="text-gray-700">{faq.answer}</p>
+                  <div className="px-5 pb-5 pt-2 bg-gray-50 border-t border-gray-100 animate-fade-in">
+                    <p className="text-gray-700 text-base leading-relaxed">{faq.answer}</p>
                   </div>
                 </div>
               </div>

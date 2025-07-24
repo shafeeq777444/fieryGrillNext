@@ -1,3 +1,4 @@
+import LazyImg from "@/components/common/LazyImg";
 import React, { useState, useEffect, useRef } from "react";
 const FADE_DURATION = 400; // ms
 
@@ -47,7 +48,7 @@ const MenuCategorySection = ({ title, image, dishes, imageFirst = true, pageSize
           {/* Mobile image (top) if imageFirst is false */}
           <div className="flex justify-center md:hidden mt-8">
             <div className="rounded-lg shadow-lg overflow-hidden h-60  w-full">
-              <img src={image} alt={title} className="object-cover w-full h-full" />
+              <LazyImg src={image} alt={title} className="object-cover w-full h-full" />
             </div>
           </div>
 
@@ -55,7 +56,7 @@ const MenuCategorySection = ({ title, image, dishes, imageFirst = true, pageSize
           {imageFirst && (
             <div className="md:flex justify-center hidden">
               <div className="rounded-lg shadow-lg overflow-hidden h-160 w-full">
-                <img src={image} alt={title} className="object-cover w-full h-full" />
+                <LazyImg src={image} alt={title} className="object-cover w-full h-full" />
               </div>
             </div>
           )}
@@ -107,7 +108,7 @@ const MenuCategorySection = ({ title, image, dishes, imageFirst = true, pageSize
           {!imageFirst && (
             <div className="md:flex justify-center hidden">
               <div className="rounded-lg shadow-lg overflow-hidden h-160 w-full">
-                <img src={image} alt={title} className="object-cover w-full h-full" />
+                <LazyImg src={image} alt={title} className="object-cover w-full h-full" />
               </div>
             </div>
           )}

@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import { Heart, Utensils, User, Users } from "lucide-react";
 import { useGetPlans } from "../../services/Hooks/usePlans";
-import MealPlanCategory from "../../components/plans/MealPlanCategory";
 import MealPlanCard from "../../components/plans/MealPlanCard";
 import { motion } from "framer-motion";
+import MealPlansSkeleton from "./MealPlanSkelton";
+
+
 
 const MealPlansUI = () => {
     const [selectedCategory, setSelectedCategory] = useState("veg");
-    const { data: sampleData } = useGetPlans("fieryGrillss");
+    const { data: sampleData,isLoading } = useGetPlans("fieryGrillss");
 
     // Define categories
     const categories = [
@@ -47,19 +49,7 @@ const MealPlansUI = () => {
     // Get filtered plans based on selected category
     const filteredPlans = sampleData?.filter((plan) => plan.mealType === selectedCategory);
 
-    // Get category icon
-    const getCategoryIcon = (categoryId) => {
-        switch (categoryId) {
-            case "veg":
-                return <Heart size={20} />;
-            case "non-veg":
-                return <Utensils size={20} />;
-            case "mixed":
-                return <Utensils size={20} />;
-            default:
-                return <Utensils size={20} />;
-        }
-    };
+ 
 
     // Get plan type icon
     const getPlanTypeIcon = (planType) => {
@@ -79,9 +69,15 @@ const MealPlansUI = () => {
     const formatPrice = (price, period) => {
         return `$${price.toLocaleString("en-IN")}/${period}`;
     };
+    
+    if (isLoading) {
+        return <MealPlansSkeleton />;
+    }
+    
+    
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className=" bg-white ">
             {/* Category Selection Section */}
             <section className="pt-10 bg-white">
                 <div className="container mx-auto px-4">

@@ -25,7 +25,7 @@ const Home = () => {
   <AnimatedOnScroll><AboutBrief /></AnimatedOnScroll>
   <AnimatedOnScroll><FoodAndPlansBrief /></AnimatedOnScroll>
   <AnimatedOnScroll><DeliveryBrief /></AnimatedOnScroll>
-  <AnimatedOnScroll><ScrollingReviewCards /></AnimatedOnScroll>
+  {/* <AnimatedOnScroll><ScrollingReviewCards /></AnimatedOnScroll> */}
   <NewsLetter />
         </div>
     );
