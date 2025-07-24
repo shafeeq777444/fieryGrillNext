@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Hero from "../components/Home/Hero.jsx";
 import AboutBrief from "../components/Home/AboutBrief.jsx";
@@ -10,6 +10,7 @@ import FoodAndPlansBrief from "../components/Home/FoodAndPlansBrief.jsx";
 import AnimatedOnScroll from "../components/common/AnimatedScrollerOnWraaper.jsx";
 import Offers from "../containers/home/Offers.jsx";
 
+
 // import GlowButton from '../components/Buttons/GlowButton'
 // import SwipableCardCarousel from '../components/Home/Gallery.js'
 // import InstagramCard from '../components/Gallery/InstagramCard.jsx'
@@ -18,6 +19,7 @@ import Offers from "../containers/home/Offers.jsx";
 
 
 const Home = () => {
+   
     return (
         <div className="bg-white"> 
           <Hero />

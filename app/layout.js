@@ -21,6 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
   description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
+  metadataBase: new URL('https://fierygrills.com'),
   openGraph: {
     title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
     description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
@@ -28,7 +29,7 @@ export const metadata = {
     siteName: 'Fiery Grills',
     images: [
       {
-        url: '/logos/logo2.png', // must be in /public
+        url: '/logos/logo1.png', // must be in /public
         width: 1200,
         height: 630,
         alt: 'Delicious Punjabi Tiffin from Fiery Grills',
@@ -44,13 +45,14 @@ export const metadata = {
     images: ['/logos/logo2.png'],
   },
   icons: {
-    icon: '/logos/logo2.png',
-    apple: '/logos/logo2.png',
+    icon: '/logos/logo1.png',
+    apple: '/logos/logo1.png',
   },
 };
 
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <Head>
