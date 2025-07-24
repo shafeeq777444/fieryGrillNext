@@ -67,6 +67,20 @@ export default function RootLayout({ children }) {
         {/* Meta Tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="color-scheme" content="dark light" />
+         {/* Open Graph (WhatsApp, Facebook, Telegram, LinkedIn) */}
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fiery-grill-next.vercel.app" />
+  <meta property="og:title" content="Fiery Grills – Authentic Punjabi Tiffin in Canada" />
+  <meta property="og:description" content="Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!" />
+  <meta property="og:image" content="https://fiery-grill-next.vercel.app/logos/logo1.png" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://fiery-grill-next.vercel.app" />
+  <meta name="twitter:title" content="Fiery Grills – Authentic Punjabi Tiffin in Canada" />
+  <meta name="twitter:description" content="Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!" />
+  <meta name="twitter:image" content="https://fiery-grill-next.vercel.app/logos/logo2.png" />
+
 
         {/* Script to swap favicon based on system theme */}
         <script
