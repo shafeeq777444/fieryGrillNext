@@ -21,15 +21,15 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
   description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
-  metadataBase: new URL('https://fierygrills.com'),
+  metadataBase: new URL('https://fiery-grill-next.vercel.app'), // ✅ use current live domain
   openGraph: {
     title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
     description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
-    url: 'https://fierygrills.com',
+    url: 'https://fiery-grill-next.vercel.app',
     siteName: 'Fiery Grills',
     images: [
       {
-        url: '/logos/logo1.png', // must be in /public
+        url: 'https://fiery-grill-next.vercel.app/logos/logo1.png', // ✅ absolute path
         width: 1200,
         height: 630,
         alt: 'Delicious Punjabi Tiffin from Fiery Grills',
@@ -42,13 +42,14 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Fiery Grills – Authentic Punjabi Tiffin in Canada',
     description: 'Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!',
-    images: ['/logos/logo2.png'],
+    images: ['https://fiery-grill-next.vercel.app/logos/logo2.png'], // ✅ absolute path
   },
   icons: {
     icon: '/logos/logo1.png',
     apple: '/logos/logo1.png',
   },
 };
+
 
 
 export default function RootLayout({ children }) {
