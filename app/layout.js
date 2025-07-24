@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
   <meta property="og:url" content="https://fiery-grill-next.vercel.app" />
   <meta property="og:title" content="Fiery Grills – Authentic Punjabi Tiffin in Canada" />
   <meta property="og:description" content="Authentic Punjabi Tiffin in Canada. Enjoy spicy and tasty meals delivered fresh to your door!" />
-  <meta property="og:image" content="https://fiery-grill-next.vercel.app/logos/logo1.png" />
+  <meta property="og:image" content="https://fiery-grill-next.vercel.app/logos/logo2.png" />
 
   {/* Twitter Card */}
   <meta name="twitter:card" content="summary_large_image" />
