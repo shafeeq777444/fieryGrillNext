@@ -45,8 +45,8 @@ export const metadata = {
     images: ['https://fiery-grill-next.vercel.app/logos/logo2.png'], // ✅ absolute path
   },
   icons: {
-    icon: '/logos/logo2.png',
-    apple: '/logos/logo2.png',
+    icon: '/logos/logo1.png',
+    apple: '/logos/logo1.png',
   },
 };
 
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Head>
         {/* Primary Favicon */}
-        <link id="favicon" rel="icon" href="/assets/logo2.png" />
+        <link id="favicon" rel="icon" href="/assets/logo1.png" />
         {/* Font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
