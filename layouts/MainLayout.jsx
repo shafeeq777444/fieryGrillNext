@@ -27,7 +27,7 @@ const MainLayout = () => {
 
     useEffect(() => {
         // Only run splash on home page "/"
-        if (location.pathname === "/") {
+        if (location === "/") {
             const timer = setTimeout(() => {
                 setShowSplash(false);
             }, 3000);
@@ -35,9 +35,9 @@ const MainLayout = () => {
         } else {
             setShowSplash(false); // skip splash immediately on other routes
         }
-    }, [location.pathname]);
+    }, [location]);
 
-    if (showSplash && location.pathname === "/") return <SplashScreen />;
+    if (showSplash && location === "/") return <SplashScreen />;
 
     return (
         <>
