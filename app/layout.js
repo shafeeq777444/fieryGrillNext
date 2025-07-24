@@ -45,8 +45,8 @@ export const metadata = {
     images: ['https://fiery-grill-next.vercel.app/logos/logo2.png'], // ✅ absolute path
   },
   icons: {
-    icon: '/logos/logo1.png',
-    apple: '/logos/logo1.png',
+    icon: '/logos/logo2.png',
+    apple: '/logos/logo2.png',
   },
 };
 
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <Head>
         {/* Primary Favicon */}
-        <link id="favicon" rel="icon" href="/assets/logo1.png" />
+        <link id="favicon" rel="icon" href="/assets/logo2.png" />
         {/* Font */}
         <link
           href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
               window.addEventListener('DOMContentLoaded', () => {
                 const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 const favicon = document.getElementById('favicon');
-                if (favicon) favicon.href = darkMode ? '/assets/logo1.png' : '/assets/logo2.png';
+                if (favicon) favicon.href = darkMode ? '/assets/logo2.png' : '/assets/logo2.png';
               });
             `,
           }}
