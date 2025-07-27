@@ -7,10 +7,14 @@ import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 // import AnimatedButton from "./Buttons/Order";
 import { FaTiktok } from "react-icons/fa";
+import { useGetContactDetails } from "@/services/Hooks/useContactDetails";
 
 const Hero = () => {
+  const {data:contactDetails,isLoading}=useGetContactDetails();
   const router = useRouter();
-
+  
+  if(isLoading) return <div></div>
+  console.log(contactDetails,"--contactDetails")
   return (
     <div className="relative w-full h-[100vh] overflow-hidden">
       {/* Background image */}
@@ -33,14 +37,14 @@ const Hero = () => {
         transition={{ delay: 1, duration: 0.6 }}
         className="absolute top-1/2 right-6 transform -translate-y-1/2 space-y-4 z-10 md:flex hidden flex-col gap-4"
       >
-        <a href="https://www.instagram.com/_fierygrillss/" target="_blank" className="text-white text-2xl hover:text-[#EBB03F] transition">
+        <a href={contactDetails?.instagram} target="_blank" className="text-white text-2xl hover:text-[#EBB03F] transition">
           <FaInstagram />
         </a>
 
-        <a href="#" className="text-white text-2xl hover:text-[#EBB03F] transition">
+        <a href={contactDetails?.facebook} target="_blank" className="text-white text-2xl hover:text-[#EBB03F] transition">
           <FaFacebookF />
         </a>
-        <a href="#" className="text-white text-2xl hover:text-[#EBB03F] transition">
+        <a href={contactDetails?.tiktok} target="_blank" className="text-white text-2xl hover:text-[#EBB03F] transition">
         <FaTiktok />
         </a>
       </motion.div>

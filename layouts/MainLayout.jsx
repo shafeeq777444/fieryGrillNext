@@ -11,8 +11,11 @@ import { Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import OrderModal from "@/components/common/OrderModal";
 import SplashScreen from "@/components/common/SplashScreen";
+import { useGetContactDetails } from "@/services/Hooks/useContactDetails";
 
 const MainLayout = () => {
+
+    const {data:contactDetails}=useGetContactDetails();
     const location = usePathname();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpenModal = () => {
@@ -53,7 +56,7 @@ const MainLayout = () => {
             >
                 <SendButton
                     onClick={() => {
-                        window.location.href = "tel:+14373131390";
+                        window.location.href = `tel:${contactDetails?.contactNumber}`;
                     }}
                     text="Call us"
                     color="#000000"
@@ -61,11 +64,10 @@ const MainLayout = () => {
                 />
                 <SendButton
                     onClick={() => {
-                        const phone = "14373131390";
                         const message = encodeURIComponent(
-                            "Hey Fiery Grills! I'm interested in ordering your delicious food."
+                            `Hey Fiery Grills! I'm interested in ordering your delicious food.\n\n  ${contactDetails?.website};`
                         );
-                        window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+                        window.open(`${contactDetails?.whatsapp}?text=${message}`, "_blank");
                     }}
                     text="Whatsapp"
                     color="#1E1E1E"
