@@ -30,7 +30,7 @@ export default function DeliveryBrief() {
           </p>
           <button
             onClick={() => {
-              router.push('/about');
+              router.push('/location');
               setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }, 100);

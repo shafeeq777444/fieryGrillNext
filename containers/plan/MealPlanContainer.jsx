@@ -26,7 +26,7 @@ const MealPlansUI = () => {
         },
         {
             id: "non-veg",
-            title: "Non-Vegetarian",
+            title: "Vegan",
             description: "Protein-rich meals with lean meats, fresh fish, and balanced nutrition for meat lovers.",
             price: "25",
             bgColor: "bg-red-100",

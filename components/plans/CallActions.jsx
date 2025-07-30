@@ -22,7 +22,7 @@ const CallActions = () => {
               <ul className="mb-8 space-y-4">
                 <li className="flex items-start gap-3">
                   <span className="mt-1">{checkIcon}</span>
-                  <span className="text-gray-800 text-base font-medium">Select your favorite Punjabi dishes</span>
+                  <span className="text-gray-800 text-base font-medium">Punjabi favorite dishes</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="mt-1">{checkIcon}</span>
