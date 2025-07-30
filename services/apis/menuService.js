@@ -52,11 +52,5 @@ export const getAllDishes = async ({ vendor, category }) => {
 
 export const getWeeklyDishes = async () => {
     const response = await axiosInstance2.get("/GetMyMenu/GetWeekMenu?vendorCode=FG");
-    const menuData = response.data;
-    const dayWiseArray = menuData.menus.map(day => ({
-      day: day.dayName,
-      items: day.menu.products.map(product => product.productName),
-    }));
-    console.log(dayWiseArray, "dayWiseArray");
-    return dayWiseArray;
+    return response.data;
 };
