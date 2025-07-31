@@ -9,7 +9,7 @@ const Offers = () => {
   const { data: offerBanner = [], isLoading } = useGetAllOfferBanner("FG");
   const [selectedBanner, setSelectedBanner] = useState(null);
 
-  if (isLoading) return <p>Loading...</p>;
+  // if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="relative w-full bg-white py-6 px-4 sm:px-8 xl:px-4 mt-8 overflow-hidden">
