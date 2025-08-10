@@ -1,11 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGetContactDetails } from "@/services/Hooks/useContactDetails";
+import { ContactForm } from "./ContactForm";
 
 const LocationHero = () => {
     const router = useRouter();
     const { data } = useGetContactDetails();
+    const [showContactForm, setShowContactForm] = useState(false);
     console.log(data);
     const handleMenuClick = (e) => {
         e.preventDefault();
@@ -46,14 +48,16 @@ const LocationHero = () => {
                             Our Menu
                         </button>
 
-                        <a href={`tel:${data?.contactNumber}`}>
-                            <button className="bg-white text-primary px-4 py-3 !rounded-button hover:bg-primary hover:text-white transition-all whitespace-nowrap border-0">
-                                Contact Us
-                            </button>
-                        </a>
+                        <button 
+                            onClick={() => setShowContactForm(true)}
+                            className="bg-white text-primary px-4 py-3 !rounded-button hover:bg-primary hover:text-gray-500 transition-all whitespace-nowrap border-0"
+                        >
+                            Contact Us
+                        </button>
                     </div>
                 </div>
             </div>
+            {showContactForm && <ContactForm onClose={() => setShowContactForm(false)} />}
         </section>
     );
 };
