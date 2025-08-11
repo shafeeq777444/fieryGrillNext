@@ -318,6 +318,7 @@ export const ContactForm = ({ onClose }) => {
                                 </p>
                             )}
                         </form>
+                        
                     )}
                 </div>
             </div>
