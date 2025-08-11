@@ -37,7 +37,8 @@ const Hero = () => {
         initial={{ scale: 1.2, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1 }}
-        className={`w-full h-full object-cover transition-all duration-500 ${imgLoaded ? 'blur-xl scale-105' : 'blur-0 scale-100'}`}
+        className={`w-full h-full object-cover transition-all duration-500 
+          `}
         src="/assets/hero9.jpg"
         alt="Punjab food tiffin"
         onLoad={() => setImgLoaded(true)}
