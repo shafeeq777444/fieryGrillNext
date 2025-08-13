@@ -18,7 +18,7 @@ const NewsLetter = () => {
     }
 
     addSubscribe(
-      { data: trimmedData, vendor: "fieryGrills" },
+      { data: trimmedData, vendor: "FG" },
       {
         onSuccess: () => {
           toast.success("Thanks for your subscription!");

@@ -55,7 +55,7 @@ export default function Footer() {
             return;
         }
 
-        addSubscribe({ data: input, vendor: "fieryGrills" });
+        addSubscribe({ data: input, vendor: "FG" });
         setSubscriberData("");
         toast.success("Thanks for your subscription!");
     };
