@@ -36,9 +36,19 @@ body {
 /* 👇 Add this section anywhere after imports */
 .scrollbar-hide-y {
   scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  overflow: -moz-scrollbars-none; /* Firefox (older versions) */
 }
 .scrollbar-hide-y::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none; /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
+}
+.scrollbar-hide-y::-webkit-scrollbar-track {
+  display: none;
+}
+.scrollbar-hide-y::-webkit-scrollbar-thumb {
+  display: none;
 }
 
 

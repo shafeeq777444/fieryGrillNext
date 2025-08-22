@@ -46,18 +46,26 @@ export default function Footer() {
     const [subscriberData, setSubscriberData] = useState("");
 
     const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-    const isValidPhone = (value) => /^\+?[0-9\s\-().]{7,20}$/.test(value.trim());
 
-    const handleSubscribeButton = () => {
-        const input = subscriberData.trim();
-        if (!isValidEmail(input) && !isValidPhone(input)) {
-            toast.error("Enter a valid email or phone number");
-            return;
+    const handleSubscribeButton = async () => {
+        try{
+            const input = subscriberData.trim();
+            if (!isValidEmail(input)) {
+                toast.error("Enter a valid email");
+                return;
+            }
+    
+            const result=await addSubscribe({ data: input, vendor: "FG" });
+
+            // Only show success toast and clear input if API call succeeds
+            setSubscriberData("");
+            if(!result.response.data.message==="Subscriber already exists"){
+                toast.success("Thanks for your subscription!");
+            }
+        }catch(err){
+            console.log(err);
+            // toast.error("Subscription failed. Please try again.");
         }
-
-        addSubscribe({ data: input, vendor: "FG" });
-        setSubscriberData("");
-        toast.success("Thanks for your subscription!");
     };
     
 
@@ -174,7 +182,7 @@ export default function Footer() {
                             type="text"
                             value={subscriberData}
                             onChange={(e) => setSubscriberData(e.target.value)}
-                            placeholder="Enter your email or phone"
+                            placeholder="Enter your email"
                             className="w-full bg-[#2A2A2A] border border-gray-700 rounded-md px-4 py-2 text-white text-sm placeholder:text-white/50 focus:outline-none"
                         />
                         <button

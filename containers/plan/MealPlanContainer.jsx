@@ -17,6 +17,7 @@ const MealPlansUI = () => {
         {
             id: "veg",
             title: "Vegetarian",
+            title2: "Vegetarian",
             description: "Delicious vegetarian meals prepared with fresh vegetables, paneer, and authentic  spices.",
             price: "15",
             bgColor: "bg-green-100",
@@ -27,6 +28,7 @@ const MealPlansUI = () => {
         {
             id: "non-veg",
             title: "Vegan",
+            title2: "Vegan",
             description: "Protein-rich meals with lean meats, fresh fish, and balanced nutrition for meat lovers.",
             price: "25",
             bgColor: "bg-red-100",
@@ -36,7 +38,8 @@ const MealPlansUI = () => {
         },
         {
             id: "mixed",
-            title: "Mixed",
+            title: "Veg & Non-Veg Combo",
+            title2: "Mixed",
             description: "Perfect combination of vegetarian and non-vegetarian dishes for varied taste preferences.",
             price: "20",
             bgColor: "bg-orange-100",
@@ -105,7 +108,7 @@ const MealPlansUI = () => {
                                             transition={{ type: "spring", duration: 0.6 }}
                                         />
                                     )}
-                                    <span className="relative z-10">{category.title}</span>
+                                    <span className="relative z-10">{category.title2}</span>
                                 </button>
                             ))}
                         </div>

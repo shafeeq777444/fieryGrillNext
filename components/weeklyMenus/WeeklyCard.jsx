@@ -111,11 +111,11 @@ const Card = ({ menu, isMobile, onClick }) => {
                   {product.productName}
                 </span>
               </div>
-              <span className={`text-red-600 font-semibold flex-shrink-0 ${
+              {/* <span className={`text-red-600 font-semibold flex-shrink-0 ${
                 isMobile ? 'text-sm' : 'text-xs'
               }`}>
                 £{product.price}
-              </span>
+              </span> */}
             </motion.li>
           ))}
         </motion.ul>

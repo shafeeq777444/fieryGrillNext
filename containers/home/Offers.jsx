@@ -71,7 +71,7 @@ const Offers = () => {
           onClick={() => setSelectedBanner(null)}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative"
+            className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative "
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -83,34 +83,36 @@ const Offers = () => {
             >
               ×
             </button>
-
-            <img
-              src={selectedBanner.image}
-              alt={selectedBanner.title}
-              className="rounded-lg w-full aspect-[4/5] object-cover mb-4 shadow-md"
-            />
-            <h2 className="text-xl font-semibold mb-2 text-gray-800">
-              {selectedBanner.title}
-            </h2>
-
-            {/* Description parsing */}
-            {(() => {
-              const parsed = parseDescription(selectedBanner.description);
-              if (!parsed) return null;
-
-              return (
-                <div>
-                  <h3 className="text-lg font-medium text-gray-700 mb-2">
-                    {parsed.heading}
-                  </h3>
-                  <ul className="list-disc list-inside text-gray-600 space-y-1">
-                    {parsed.points.map((point, idx) => (
-                      <li key={idx}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })()}
+<div className="max-h-[72vh] overflow-auto scrollbar-hide-y">
+  
+              <img
+                src={selectedBanner.image}
+                alt={selectedBanner.title}
+                className="rounded-lg w-full aspect-[4/5] object-cover mb-4 shadow-md"
+              />
+              <h2 className="text-xl font-semibold mb-2 text-gray-800">
+                {selectedBanner.title}
+              </h2>
+  
+              {/* Description parsing */}
+              {(() => {
+                const parsed = parseDescription(selectedBanner.description);
+                if (!parsed) return null;
+  
+                return (
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-700 mb-2 ">
+                      {parsed.heading}
+                    </h3>
+                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                      {parsed.points.map((point, idx) => (
+                        <li key={idx}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })()}
+</div>
           </div>
         </div>
       )}

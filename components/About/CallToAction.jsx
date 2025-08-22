@@ -1,12 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useGetContactDetails } from "@/services/Hooks/useContactDetails";
+import { ContactForm } from "@/components/Location/ContactForm";
 
 const CallToAction = () => {
     const { data } = useGetContactDetails();
     const router = useRouter();
+    const [isContactFormOpen, setIsContactFormOpen] = useState(false);
 
     return (
         <section className="py-16 md:py-24 bg-gradient-to-r bg-red-800 text-white relative overflow-hidden">
@@ -35,33 +37,40 @@ const CallToAction = () => {
                             See Our Plans
                         </button>
 
-                        <a href={`tel:${data?.contactNumber}`}>
-                            <button className="bg-transparent rounded-md px-8 py-4 !rounded-button font-semibold hover:bg-white hover:text-black transition-colors whitespace-nowrap">
+
+                            <button 
+                                onClick={() => setIsContactFormOpen(true)}
+                                className="bg-transparent rounded-md px-8 py-4 !rounded-button font-semibold hover:bg-white hover:text-black transition-colors whitespace-nowrap"
+                            >
                                 Contact Us
                             </button>
-                        </a>
+
                     </div>
 
                     <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div className="text-center">
-                            <div className="text-4xl font-bold">200+</div>
-                            <p className="opacity-90">Daily Meals</p>
+                            {/* <div className="text-4xl font-bold">200+</div>
+                            <p className="opacity-90">Daily Meals</p> */}
                         </div>
                         <div className="text-center">
                             <div className="text-4xl font-bold">50+</div>
                             <p className="opacity-90">Recipes</p>
                         </div>
                         <div className="text-center">
-                            <div className="text-4xl font-bold">5</div>
+                            <div className="text-4xl font-bold">{new Date().getFullYear() - 2021}</div>
                             <p className="opacity-90">Years of Service</p>
                         </div>
                         <div className="text-center">
-                            <div className="text-4xl font-bold">98%</div>
-                            <p className="opacity-90">Customer Satisfaction</p>
+                            {/* <div className="text-4xl font-bold">98%</div>
+                            <p className="opacity-90">Customer Satisfaction</p> */}
                         </div>
                     </div>
                 </div>
             </div>
+            
+            {isContactFormOpen && (
+                <ContactForm onClose={() => setIsContactFormOpen(false)} />
+            )}
         </section>
     );
 };
