@@ -16,6 +16,7 @@ import { useGetContactDetails } from "@/services/Hooks/useContactDetails";
 const MainLayout = () => {
 
     const {data:contactDetails}=useGetContactDetails();
+    console.log(contactDetails,"contactdetails")
     const location = usePathname();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpenModal = () => {

@@ -28,7 +28,7 @@ export default function Footer() {
     const socialIcons = [
         { icon: <FaFacebookF />, href: data?.facebook },
         { icon: <FaInstagram />, href: data?.instagram },
-        { icon: <IoMailOutline />, href: data?.email },
+        { icon: <IoMailOutline />, href: `mailto:${data?.email}` },
         { icon: <RiTiktokLine />, href: data?.tiktok },
     ];
     const links = [
@@ -108,6 +108,18 @@ export default function Footer() {
                                     {item.href?.startsWith("tel:") ? (
                                         <a
                                             href={item.href}
+                                            className="flex items-center gap-2 hover:text-[#EBB03F] transition"
+                                        >
+                                            {React.cloneElement(item.icon, {
+                                                className: "text-[#EBB03F]",
+                                            })}
+                                            {item.label}
+                                        </a>
+                                    ) : item.href?.startsWith("mailto:") ? (
+                                        <a
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="flex items-center gap-2 hover:text-[#EBB03F] transition"
                                         >
                                             {React.cloneElement(item.icon, {
