@@ -45,7 +45,7 @@ const Navbar = ({ onClick }) => {
   return (
     <motion.nav
       ref={navbarRef}
-      className={`fixed top-0 left-0 w-full z-50 px-6 py-4 md:py-6 font-balooTwo text-white transition-all duration-300 ease-in-out backdrop-blur-md bg-[#1c1c1c] ${
+      className={`fixed top-0 left-0 w-full z-50 px-6 py-4 md:py-6 font-balooTwo text-white transition-all duration-300 ease-in-out backdrop-blur-xs bg-[#1c1c1c] ${
         scrolled || pathname !== "/" ? "bg-opacity-95 shadow-md py-3" : "shadow-none bg-transparent"
       }`}
       initial={{ opacity: 0, y: 0 }}

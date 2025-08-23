@@ -9,6 +9,7 @@ import DeliveryBrief from "../components/Home/DeliveryBrief.jsx";
 import FoodAndPlansBrief from "../components/Home/FoodAndPlansBrief.jsx";
 import AnimatedOnScroll from "../components/common/AnimatedScrollerOnWraaper.jsx";
 import Offers from "../containers/home/Offers.jsx";
+import GoogleReviews from "@/components/common/GoogleReview.jsx";
 
 
 // import GlowButton from '../components/Buttons/GlowButton'
@@ -27,6 +28,7 @@ const Home = () => {
   <AnimatedOnScroll><AboutBrief /></AnimatedOnScroll>
   <AnimatedOnScroll><FoodAndPlansBrief /></AnimatedOnScroll>
   <AnimatedOnScroll><DeliveryBrief /></AnimatedOnScroll>
+  {/* <AnimatedOnScroll><GoogleReviews /></AnimatedOnScroll> */}
   {/* <AnimatedOnScroll><ScrollingReviewCards /></AnimatedOnScroll> */}
   <NewsLetter />
         </div>

@@ -5,6 +5,7 @@ import MainLayout from "@/layouts/MainLayout";
 import QueryProvider from "@/Provider/QueryProvider";
 import { Toaster } from "react-hot-toast";
 import Head from "next/head";
+import CookieBanner from "@/components/common/CookiesBanner";
 
 // Fonts setup
 const geistSans = Geist({
@@ -99,6 +100,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <QueryProvider>
           <Toaster />
+          <CookieBanner />
           {children}
           <MainLayout />
         </QueryProvider>
